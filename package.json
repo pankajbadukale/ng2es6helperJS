@@ -1,0 +1,19 @@
+{
+  "name": "ng2es6helper",
+  "version": "0.0.0",
+  "description": "help to build angualr2 app with es6 This has few common function in it",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pankajbadukale/ng2es6helperJS.git"
+  },
+  "author": "pankaj badukale <pankajbadukale@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pankajbadukale/ng2es6helperJS/issues"
+  },
+  "homepage": "https://github.com/pankajbadukale/ng2es6helperJS#readme"
+}
