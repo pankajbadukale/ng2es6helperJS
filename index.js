@@ -1,13 +1,16 @@
-import { Component, NgModule } from '@angular/core';
-import { RouterModule, PreloadAllModules } from '@angular/router';
-import { extend } from 'lodash';
+import { Component as ngComponent, NgModule as ngModule } from '@angular/core';
+import { RouterModule as routerModule, PreloadAllModules as preLoadAllModules } from '@angular/router';
+import { platformBrowserDynamic as platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { BrowserModule as BrowserModule } from '@angular/platform-browser';
+import { enableProdMode as enableProdMode } from '@angular/core';
+import _extend from 'lodash/extend';
 
 const useHash = true;
 let ROUTES = [];
 
 export const component = (prop, targetClass) => {
     targetClass.annotations = [
-        new Component(extend({}, prop))
+        new ngComponent(_extend({}, prop))
     ];
 
     // check if has route config 
@@ -27,14 +30,17 @@ export const component = (prop, targetClass) => {
 
 export const module = (prop, targetClass) => {
     targetClass.annotations = [
-        new NgModule(extend({}, prop))
+        new ngModule(_extend({}, prop))
     ];
 
     return targetClass;
 };
 
 export const routerConfig = (ROUTES) => {
-    return RouterModule.forRoot(ROUTES, { useHash: useHash, preloadingStrategy: PreloadAllModules }) 
+    return RouterModule.forRoot(ROUTES, { useHash: useHash, preloadingStrategy: preLoadAllModules }) 
 };
 
 export const routeConfig = ROUTES;
+export const browserPlatform = platformBrowserDynamic;
+export const browserModule = BrowserModule;
+export const appProdMode = enableProdMode;
