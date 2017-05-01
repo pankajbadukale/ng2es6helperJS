@@ -1,22 +1,46 @@
-import { Component, NgModule } from '@angular/core';
-import { RouterModule, PreloadAllModules } from '@angular/router';
-import { extend } from 'lodash';
+import { Component as ngComponent, NgModule as ngModule, enableProdMode as enableProdMode } from '@angular/core';
+import { RouterModule as routerModule, PreloadAllModules as preLoadAllModules } from '@angular/router';
+import { platformBrowserDynamic as platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { BrowserModule as BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule as BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { 
+    MaterialModule as MaterialModule,
+    MdButtonModule as MdButtonModule,
+    MdDialogModule as MdDialogModule,
+    MdDialog as MdDialog
+} from '@angular/material';
 
 const useHash = true;
 let ROUTES = [];
 
 export const component = (prop, targetClass) => {
+    let services = null;
+    if( prop.service !== undefined ) {
+        services = prop.service;
+        delete prop.service;
+    }
+
+    let routeProp = null;
+    if( prop.route !== undefined ) {
+        routeProp = prop.route;
+        delete prop.route;
+    }
+
     targetClass.annotations = [
-        new Component(extend({}, prop))
+        new ngComponent(Object.assign({}, prop))
     ];
+
+    // check for any service injection
+    services ? targetClass.parameters = services : null
 
     // check if has route config 
     // if YES then add it to routes
-    if(prop.route !== undefined) {
+    if(routeProp) {
         // it as route prop set
         ROUTES.push( 
             {
-                path: prop.route,
+                path: routeProp,
                 component: targetClass
             }
         );
@@ -25,16 +49,24 @@ export const component = (prop, targetClass) => {
     return targetClass;
 };
 
-export const module = (prop, targetClass) => {
+export const ngmodule = (prop, targetClass) => {
     targetClass.annotations = [
-        new NgModule(extend({}, prop))
+        new ngModule(Object.assign({}, prop))
     ];
 
     return targetClass;
 };
 
 export const routerConfig = (ROUTES) => {
-    return RouterModule.forRoot(ROUTES, { useHash: useHash, preloadingStrategy: PreloadAllModules }) 
+    return RouterModule.forRoot(ROUTES, { useHash: useHash, preloadingStrategy: preLoadAllModules }) 
 };
 
 export const routeConfig = ROUTES;
+export const browserPlatform = platformBrowserDynamic;
+export const browserModule = BrowserModule;
+export const appProdMode = enableProdMode;
+export const browserAnimationModule = BrowserAnimationsModule;
+export const mdButton = MdButtonModule;
+export const mdModule = MaterialModule;
+export const mdDialogModule = MdDialogModule;
+export const mdDialog = MdDialog;
