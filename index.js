@@ -3,7 +3,6 @@ import { RouterModule as routerModule, PreloadAllModules as preLoadAllModules } 
 import { platformBrowserDynamic as platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserModule as BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule as BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { 
     MaterialModule as MaterialModule,
     MdButtonModule as MdButtonModule,
