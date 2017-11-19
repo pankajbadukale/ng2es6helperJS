@@ -1,5 +1,5 @@
 {
-  "name": "@pankaj/ng2es6helper",
+  "name": "ng2es6helper",
   "version": "0.0.0",
   "description": "help to build angualr2 app with es6 This has few common function in it",
   "main": "index.js",
